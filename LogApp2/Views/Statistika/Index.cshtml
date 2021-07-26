@@ -1,0 +1,75 @@
+﻿@model IEnumerable<LogApp2.Models.mvcLoggingModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Статистика по данным логирования</h1>
+<h3><b>Сохраненные записи</b></h3>
+<h4>Кол-во сохраненных записей: @Model.Count()</h4>
+<h3><b>Уровни логирования</b></h3>
+@foreach (var item in Model.GroupBy(c => c.Level))
+{
+    <h4>Кол-во сохраненных записей уровня @item.Key : @Model.Where(v => v.Level == @item.Key).Count()</h4>
+}
+<h3><b>Источники действия</b></h3>
+@foreach (var item in Model.GroupBy(c => c.Logger))
+{
+    <h4>Кол-во сохраненных записей уровня @item.Key : @Model.Where(v => v.Logger == @item.Key).Count()</h4>
+}
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MachineName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logged)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logger)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Callsite)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MachineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logged)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logger)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Callsite)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

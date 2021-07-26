@@ -1,0 +1,162 @@
+﻿@model IEnumerable<LogApp2.Models.mvcLoggingModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<h1>Данные по логированию</h1>
+<br />
+<div class="container" style="border-radius: 20px; border: solid; border-color:gainsboro">
+    <h3>Поиск по данным:</h3>
+    <div class="row">
+        <div class="form-group" style="margin-left:20px">
+            <label class="control-label">Уровень логирования:</label>
+            <select id="yrCB" class="form-select form-control" aria-label="Default select example">
+                <option value="null" selected>Выбирите</option>
+                <option value="Debug">Debug</option>
+                <option value="Info">Info</option>
+                <option value="Error">Error</option>
+                <option value="Warning">Warning</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin-left:20px">
+            <label class="control-label">Дата начала:</label>
+            <input id="DSsear"  class="form-control" />
+        </div>
+        <div class="form-group" style="margin-left:20px">
+            <label class="control-label">Дата окончания:</label>
+            <input id="DEsear"  class="form-control" />
+        </div>
+        <div class="form-group" style="margin-left:20px">
+            <label class="control-label">По тексту:</label>
+            <input id="txSear" class="form-control" />
+        </div>
+    </div>
+    <button onclick="Search();" class="btn btn-secondary" style="margin-bottom:20px">Поиск по параметрам</button>
+</div>
+<br />
+    <p>
+        <a asp-action="AddOrEdit" class="btn btn-success"><i class="fa fa-plus"> </i> Добавить новые данные</a>  
+    </p>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    Наименование устройства
+                </th>
+                <th>
+                    Добавлено
+                </th>
+                <th>
+                    Уровень логирования
+                </th>
+                <th style="max-width:300px">
+                    Информация
+                </th>
+                <th style="max-width:300px">
+                    Источник
+                </th>
+
+                <th style="min-width:200px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MachineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logged)
+                </td>
+                <td>
+                    @switch (item.Level)
+                    {
+                        case "Debug":
+                            <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Level)</span>
+                            break;
+                        case "Info":
+                            <span class="badge badge-info">@Html.DisplayFor(modelItem => item.Level)</span>
+                            break;
+                        case "Error":
+                            <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.Level)</span>
+                            break;
+                        case "Warning":
+                            <span class="badge badge-warning">@Html.DisplayFor(modelItem => item.Level)</span>
+                            break;
+                    }
+
+                </td>
+
+                <td style="max-width:200px">
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td style="max-width:200px">
+                    @Html.DisplayFor(modelItem => item.Logger)
+                </td>
+
+
+                <td style="min-width:300px">
+
+                    <a asp-action="AddOrEdit" asp-route-id="@item.Id"><i class="fas fa-pen"> </i> Изменить</a> |
+                    <a class="btn btn-danger" onclick="Delete(@item.Id)"><i class="fas fa-trash-alt"> </i> Удалить</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+
+    @section scripts{
+        <script>
+            $(function () {
+                var successMessage = '@TempData["SuccessMessage"]'
+                var delMessage = '@TempData["DeleteMessage"]'
+                if (successMessage != '') {
+                    alertify.set('notifier', 'position', 'top-left');
+                    alertify.success(successMessage);
+                }
+                if (delMessage != '') {
+                    alertify.set('notifier', 'position', 'top-left');
+                    alertify.success(delMessage);
+                }
+
+            });
+
+            function Delete(id) {
+                @*alertify.confirm('Операция удаления', 'Вы точно хотите удалить данную запись?', function () {
+                    window/location.href = '@Url.Action("Delete", "mvcLoggingModel")' + id;
+                }, null);*@
+                alertify.confirm('Операция удаления', 'Вы точно хотите удалить данную запись?', function () {
+                    window.location.href = '@Url.Action("Delete", "mvcLoggingModel")' + '/' + id;
+                }
+                    , function () {
+                        alertify.set('notifier', 'position', 'top-left');
+                        alertify.error('Операция отменена!!!')
+                    });
+            };
+
+            function Search() {
+                 var yroven = $('#yrCB').val();
+                var text = document.getElementById('txSear').value;
+                var Dstart = document.getElementById('DSsear').value;
+                var Dend = document.getElementById('DEsear').value;
+                if (text == null || text == '')
+                    text = "null";
+                if (Dstart == null || Dstart == '')
+                    Dstart = "null";
+                if (Dend == null || Dend == '')
+                    Dend = "null";
+                 window.location.href = '@Url.Action("")' + '/' + 0 + '/' + yroven + '/' + text + '/' + Dstart + '/' + Dend;
+            };
+
+        </script>
+    
+    }

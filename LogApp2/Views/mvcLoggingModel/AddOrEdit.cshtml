@@ -1,0 +1,58 @@
+﻿@model LogApp2.Models.mvcLoggingModel
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+}
+
+<h1>Добавление и редактирование данных</h1>
+
+<h4>Данные логирования</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MachineName" class="control-label"></label>
+                <input asp-for="MachineName" class="form-control" />
+                <span asp-validation-for="MachineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logged" class="control-label"></label>
+                <input asp-for="Logged" class="form-control" />
+                <span asp-validation-for="Logged" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logger" class="control-label"></label>
+                <input asp-for="Logger" class="form-control" />
+                <span asp-validation-for="Logger" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Callsite" class="control-label"></label>
+                <input asp-for="Callsite" class="form-control" />
+                <span asp-validation-for="Callsite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-id="0" asp-route-yroven="null" asp-route-text="null" asp-route-start="null" asp-route-end="null">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

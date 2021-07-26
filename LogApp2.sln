@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogApp2", "LogApp2\LogApp2.csproj", "{16378F86-CB20-4FDE-84D8-DD19D4AF31BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16378F86-CB20-4FDE-84D8-DD19D4AF31BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16378F86-CB20-4FDE-84D8-DD19D4AF31BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16378F86-CB20-4FDE-84D8-DD19D4AF31BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16378F86-CB20-4FDE-84D8-DD19D4AF31BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C327C0B-A73F-4169-BF19-F9EF5EE0AC1D}
+	EndGlobalSection
+EndGlobal
